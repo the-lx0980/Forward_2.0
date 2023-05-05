@@ -23,7 +23,7 @@ OWNER=int(Config.OWNER_ID)
 
 
 @Client.on_message(filters.private & filters.command(["index"]))
-async def run(bot, message):
+async def runpublick(bot, message):
     if message.from_user.id != OWNER:
         await message.reply_text("Who the hell are you!!")
         return
