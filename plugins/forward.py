@@ -76,14 +76,14 @@ async def forward(bot, message):
                         await bot.send_cached_media(
                             chat_id=chat_id,
                             file_id=file_id,
-                            caption=f"**{caption}**"
+                            caption=caption
                             )
                     else:
                         await bot.copy_message(
                             chat_id=chat_id,
                             from_chat_id=channel,
                             parse_mode="md",
-                            caption=f"**{caption}**",
+                            caption=caption,
                             message_id=message_id
                             )
                     await asyncio.sleep(1)
@@ -101,14 +101,14 @@ async def forward(bot, message):
                         await bot.send_cached_media(
                             chat_id=chat_id,
                             file_id=file_id,
-                            caption=f"**{caption}**"
+                            caption=caption
                             )
                     else:
                         await bot.copy_message(
                             chat_id=chat_id,
                             from_chat_id=channel,
                             parse_mode="md",
-                            caption=f"**{caption}**",
+                            caption=caption,
                             message_id=message_id
                             )
                     await asyncio.sleep(1)
@@ -144,7 +144,7 @@ async def forward(bot, message):
                                         await bot.USER.send_cached_media(
                                             chat_id=chat_id,
                                             file_id=file_id,
-                                            caption=f"**{caption}**"
+                                            caption=caption
                                             )
                                     except FileReferenceExpired:
                                         try:
@@ -212,7 +212,7 @@ async def forward(bot, message):
                                             chat_id=chat_id,
                                             from_chat_id=channel,
                                             parse_mode="md",
-                                            caption=f"**{caption}**",
+                                            caption=caption,
                                             message_id=message_id
                                             )
                                     except Exception as e:
