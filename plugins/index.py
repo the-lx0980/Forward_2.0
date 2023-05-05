@@ -21,6 +21,207 @@ channel_id_=""
 IST = pytz.timezone('Asia/Kolkata')
 OWNER=int(Config.OWNER_ID)
 
+@Client.on_message(filters.private & filters.command(["index_private"]))
+
+async def run(bot, message):
+
+    if message.from_user.id != OWNER:
+
+        await message.reply_text("Who the hell are you!!")
+
+        return
+
+    while True:
+
+        try:
+
+            chat = await bot.ask(text = "To Index a channel you may send me the channel invite link, so that I can join channel and index the files.\n\nIt should be something like <code>https://t.me/xxxxxx</code> or <code>https://t.me/joinchat/xxxxxx</code>", chat_id = message.from_user.id, filters=filters.text, timeout=30)
+
+            channellink=chat.text
+
+        except TimeoutError:
+
+            await bot.send_message(message.from_user.id, "Error!!\n\nRequest timed out.\nRestart by using /index")
+
+            return
+
+        pattern=".*https://t.me/.*"
+
+        result = re.match(pattern, channel, flags=re.IGNORECASE)
+
+        if result:
+
+            print(channellink)
+
+            break
+
+        else:
+
+            await chat.reply_text("Wrong URL")
+
+            continue
+
+    if 'https' in channel:
+
+        global channel_type
+
+        channel_type="private"
+
+        try:
+
+            await bot.USER.join_chat(channellink)
+
+        except UserAlreadyParticipant:
+
+            pass
+
+        except InviteHashExpired:
+
+            await chat.reply_text("Wrong URL or User Banned in channel.")
+
+            return
+
+        while True:
+
+            try:
+
+                id = await bot.ask(text = "Since this is a Private channel I need Channel id, Please send me channel ID\n\nIt should be something like <code>-100xxxxxxxxx</code>", chat_id = message.from_user.id, filters=filters.text, timeout=30)
+
+                channel=id.text
+
+            except TimeoutError:
+
+                await bot.send_message(message.from_user.id, "Error!!\n\nRequest timed out.\nRestart by using /index")
+
+                return
+
+            channel=id.text
+
+            if channel.startswith("-100"):
+
+                global channel_id_
+
+                channel_id_=int(channel)
+
+                break
+
+            else:
+
+                await chat.reply_text("Wrong Channel ID")
+
+                continue
+
+            
+
+    else:
+
+        #global channel_type
+
+        channel_type="public"
+
+        channel_id = re.search(r"t.me.(.*)", channel)
+
+        #global channel_id_
+
+        channel_id_=channel_id.group(1)
+
+    while True:
+
+        try:
+
+            SKIP = await bot.ask(text = "Send me from where you want to start forwarding\nSend 0 for from beginning.", chat_id = message.from_user.id, filters=filters.text, timeout=30)
+
+            print(SKIP.text)
+
+        except TimeoutError:
+
+            await bot.send_message(message.from_user.id, "Error!!\n\nRequest timed out.\nRestart by using /index")
+
+            return
+
+        try:
+
+            global skip_no
+
+            skip_no=int(SKIP.text)
+
+            break
+
+        except:
+
+            await SKIP.reply_text("Thats an invalid ID, It should be an integer.")
+
+            continue
+
+    while True:
+
+        try:
+
+            LIMIT = await bot.ask(text = "Send me from Upto what extend(LIMIT) do you want to Index\nSend 0 for all messages.", chat_id = message.from_user.id, filters=filters.text, timeout=30)
+
+            print(LIMIT.text)
+
+        except TimeoutError:
+
+            await bot.send_message(message.from_user.id, "Error!!\n\nRequest timed out.\nRestart by using /index")
+
+            return
+
+        try:
+
+            global limit_no
+
+            limit_no=int(LIMIT.text)
+
+            break
+
+        except:
+
+            await LIMIT.reply_text("Thats an invalid ID, It should be an integer.")
+
+            continue
+
+    buttons=InlineKeyboardMarkup(
+
+        [
+
+            [
+
+                InlineKeyboardButton("All Messages", callback_data="all")
+
+            ],
+
+            [
+
+                InlineKeyboardButton("Document", callback_data="docs"),
+
+                InlineKeyboardButton("Photos", callback_data="photos")
+
+            ],
+
+            [
+
+                InlineKeyboardButton("Videos", callback_data="videos"),
+
+                InlineKeyboardButton("Audios", callback_data="audio")
+
+            ]
+
+        ]
+
+        )
+
+    await bot.send_message(
+
+        chat_id=message.from_user.id,
+
+        text=f"Ok,\nNow choose what type of messages you want to forward.",
+
+        reply_markup=buttons
+
+        )
+
+
 
 @Client.on_message(filters.private & filters.command(["index"]))
 async def run(bot, message):
