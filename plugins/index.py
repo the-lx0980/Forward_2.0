@@ -37,7 +37,7 @@ async def runprivate(bot, message):
             return
 
         pattern=".*https://t.me/.*"
-        result = re.match(pattern, channel, flags=re.IGNORECASE)
+        result = re.match(pattern, channellink, flags=re.IGNORECASE)
         if result:
             print(channellink)
             break
@@ -45,7 +45,7 @@ async def runprivate(bot, message):
             await chat.reply_text("Wrong URL")
             continue
 
-    if 'https' in channel:
+    if 'https' in channellink:
         global channel_type
         channel_type="private"
         try:
