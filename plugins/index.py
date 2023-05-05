@@ -44,7 +44,7 @@ async def run(bot, message):
             await chat.reply_text("Wrong URL")
             continue
 
-    if 'joinchat' in channel:
+    if 'https' in channel:
         global channel_type
         channel_type="private"
         try:
