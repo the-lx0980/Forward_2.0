@@ -16,7 +16,7 @@ MessageCount = 0
 BOT_STATUS = "0"
 status = set(int(x) for x in (BOT_STATUS).split())
 OWNER=int(Config.OWNER_ID)
-@Client.on_message(filters.command("status"))
+@Client.on_message(filters.command("status") & filters.user(OWNER))
 async def count(bot, m):
     if 1 in status:
         await m.reply_text("Currently Bot is forwarding messages.")
@@ -25,7 +25,7 @@ async def count(bot, m):
     if 1 not in status and 2 not in status:
         await m.reply_text("Bot is Idle now, You can start a task.")
 
-@Client.on_message(filters.command('total'))
+@Client.on_message(filters.command('total') & filters.user(OWNER))
 async def total(bot, message):
     msg = await message.reply("Counting total messages in DB...", quote=True)
     try:
@@ -46,7 +46,7 @@ async def clrdb(bot, message):
                 
         
 
-@Client.on_message(filters.command("forward"))
+@Client.on_message(filters.command("forward") & filters.user(OWNER))
 async def forward(bot, message):
     if 1 in status:
         await message.reply_text("A task is already running.")
