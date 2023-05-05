@@ -212,7 +212,7 @@ async def forward(bot, message):
                                             chat_id=chat_id,
                                             from_chat_id=channel,
                                             parse_mode="md",
-                                            caption=caption,
+                                            caption=f"**{caption}**",
                                             message_id=message_id
                                             )
                                     except Exception as e:
