@@ -30,28 +30,25 @@ async def runpublick(bot, message):
     while True:
         try:
             chat = await bot.ask(text = "To Index a channel you may send me the channel invite link, so that I can join channel and index the files.\n\nIt should be something like <code>public https://t.me/xxxxxx</code> or Agar private channel hai to es tarahtarah <code> private https://t.me/joinchat/xxxxxx</code>", chat_id = message.from_user.id, filters=filters.text, timeout=30)
-            channellink = chat.text
-            kmessage = chat.text.split()
-            channeltype = kmessage[1]
-            channelurl = kmessage[2]
+            channel = chat.text
         except TimeoutError:
             await bot.send_message(message.from_user.id, "Error!!\n\nRequest timed out.\nRestart by using /index")
             return
 
         pattern=".*https://t.me/.*"
-        result = re.match(pattern, channelurl, flags=re.IGNORECASE)
+        result = re.match(pattern, channel, flags=re.IGNORECASE)
         if result:
-            print(channelurl)
+            print(channel)
             break
         else:
             await chat.reply_text("Wrong URL")
             continue
 
-    if 'private' in channeltype:
+    if 'https://' in channel:
         global channel_type
         channel_type="private"
         try:
-            await bot.USER.join_chat(channelurl)
+            await bot.USER.join_chat(channel)
         except UserAlreadyParticipant:
             pass
         except InviteHashExpired:
@@ -77,7 +74,7 @@ async def runpublick(bot, message):
     else:
         #global channel_type
         channel_type="public"
-        channel_id = re.search(r"t.me.(.*)", channelurl)
+        channel_id = re.search(r"t.me.(.*)", channel)
         #global channel_id_
         channel_id_=channel_id.group(1)
 
