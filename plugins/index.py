@@ -51,7 +51,7 @@ async def run(bot, message):
         global channel_type
         channel_type="private"
         try:
-            await bot.USER.join_chat(channel)
+            await bot.USER.join_chat(channelurl)
         except UserAlreadyParticipant:
             pass
         except InviteHashExpired:
