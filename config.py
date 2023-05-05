@@ -10,7 +10,7 @@ class Config:
     DATABASE_URI = "mongodb+srv://Boyuserrentrox:mg1BbXIGzcqXXTJG@cluster0.l1xnuaj.mongodb.net/?retryWrites=true&w=majority"
     DATABASE_NAME = "Cluster0"
     COLLECTION_NAME = 'Rentrox_Forward_data'
-    SESSION = "BQC-84ergJSnJgRTe5IEke1Jbtrau7e0nohG6JNZ7BEaNRLGMNlqZ_ZhTRT75EpeD1zvFP5_HqD-Re3-avmoycUGsmvWULcgq43jb07kDhtzNdOgCaSAS90TMjw3qPrxle9gHhpH8e-7p9ihnLLeKnM3J_3qZ0p8Td_dz_Hwmj4x9eEEkWATZuigD2E_oMZcbqHSRhDRWj5Z5FbwetD1T7ALIu9lbgMCgFjoEPUWJn59txuftitgPqSBERIMs8ZZCOHubNjt9KWvNjIWbKTs3gBdsZ_PNoUJ6YZflBaRex0zW5tMzU1uypzOmI5jkhrfIxFLYYLPjXeh18dRazicS6sDAAAAAW8HBfYA"
+    SESSION = "BQCZx6_wR5qum-ro7v7Bu2DfcOsWT08O5mgknvGZ0jk3103xExKcxMFO11eB-KZ6zTjFv1NPCF3YLXL1zP9ZbY1uJ47cgxfasdVNuJpk0074lQUowF4eETicNrjg8yc_csCBshlFidYnffQX49wVc74x2VAX3P7UjKg2bxjSQ9MXrlc2R0Rzo_XPcUwsg3vf9iANbxTalIiW_mgiPJClx4A-ojBxLgHj7NsnkRQyg-Nk3J7LsjWKx4Le1g6wGYwyEpkJ7zbB0cTwQAkg_PzedHDDmqzqEvSJPU39bNBZiDY42M3M1VJCEoNBMbRe06QOa7hBf1x7SUeHWcT8ME8cWSgUAAAAAW8HBfYA"
     TO_CHANNEL = -1001559863637
     BOT_USERNAME= os.environ.get("BOT_USERNAME", None)
 
