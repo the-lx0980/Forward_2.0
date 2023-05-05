@@ -44,7 +44,7 @@ async def run(bot, message):
             await chat.reply_text("Wrong URL")
             continue
 
-    if 'https' in channel:
+    if "https://t.me/+" in channel:
         global channel_type
         channel_type="private"
         try:
